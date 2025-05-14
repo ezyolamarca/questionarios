@@ -4,42 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulário - Conversão de Bases Numéricas</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; }
-        h1 { text-align: center; }
-        .question { margin-bottom: 20px; }
-        .question h3 { margin-bottom: 5px; }
-        .question input[type="text"], .question textarea {
-            width: 100%; padding: 8px; margin-top: 5px;
-        }
-        .question input[type="radio"] {
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin-bottom: 5px;
+    }
+    .question input[type="text"],
+    .question textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .question input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 25px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+</style>
+
 </head>
 <body>
     <h1>Exercícios de Conversão de Bases Numéricas</h1>
-    <form action="https://formsubmit.co/ezyo.lamarca@ifsc.edu.br" method="POST">
+    <form id="formulario" action="https://formsubmit.co/ezyo.lamarca@ifsc.edu.br" method="POST" onsubmit="return validarFormulario()">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://obrigado.com/sucesso.html">
         <div class="question">
             <h3>Nome do aluno:</h3>
-            <input type="text" name="nome" required placeholder="Digite seu nome completo">
+            <input type="text" name="nome" id="nome" required placeholder="Digite seu nome completo">
+<div id="erro-nome" class="error">Nome deve ter ao menos 3 caracteres.</div>
         </div>
         <div class="question">
             <h3>Turma:</h3>
-            <input type="text" name="turma" required placeholder="Ex: GTI 1º Semestre A">
+            <input type="text" name="turma" id="turma" required placeholder="Ex: GTI 1º Semestre A">
+<div id="erro-turma" class="error">Turma deve ter ao menos 3 caracteres.</div>
         </div>
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://obrigado.com/sucesso.html">
@@ -99,5 +126,30 @@
             <button type="submit">Enviar Respostas</button>
         </div>
     </form>
+
+<script>
+  function validarFormulario() {
+    let nome = document.getElementById('nome').value.trim();
+    let turma = document.getElementById('turma').value.trim();
+    let valido = true;
+
+    if (nome.length < 3) {
+      document.getElementById('erro-nome').style.display = 'block';
+      valido = false;
+    } else {
+      document.getElementById('erro-nome').style.display = 'none';
+    }
+
+    if (turma.length < 3) {
+      document.getElementById('erro-turma').style.display = 'block';
+      valido = false;
+    } else {
+      document.getElementById('erro-turma').style.display = 'none';
+    }
+
+    return valido;
+  }
+</script>
+
 </body>
 </html>
